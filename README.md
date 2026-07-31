@@ -1,4 +1,4 @@
-# Advancing the Understanding of Behaviors and Attitudes in HIV and STI Research Through Latent Class Analysis and Its Extensions
+# Advancing the Understanding of HIV-Related Behaviors and Prevention Practices Through Latent Class Analysis and Its Extensions
 
 This repository contains code, synthetic data, and supplementary materials for the manuscript:
 
@@ -25,7 +25,6 @@ This repository was created to:
    3. latent class models with covariates
    4. Bayesian latent class analysis
    5. sensitivity analyses
-   6. generation of tables and figures
 
 3. offer a reproducible example of how methodological work involving sensitive HIV related data can be shared responsibly through synthetic data and detailed code annotation
 

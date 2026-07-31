@@ -3,7 +3,7 @@
 This repository contains code, synthetic data, and supplementary materials for the manuscript:
 
 Amorim LD, Arrais J, Soares F, Magno L, Dourado I.  
-Advancing the Understanding of Behaviors and Attitudes in HIV and STI Research Through Latent Class Analysis and Its Extensions.
+Advancing the Understanding of HIV-Related Behaviors and Prevention Practices Through Latent Class Analysis and Its Extensions 
 
 ## Overview
 

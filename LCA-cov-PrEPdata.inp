@@ -1,0 +1,32 @@
+
+TITLE:
+  Latent Class Analysis (LCA) with Covariates
+  Application - Analysis of Data from PrEP1519 Study (Brazil)
+  Objective -  Evaluate the effects of risk factors 
+               on latent profiles of HIV prevention practices
+  Reproduces the results presented in Table 5 of the manuscript
+  Amorim, Arrais et al (2026)
+
+DATA:	
+   file is PrEPdata.txt;
+
+VARIABLE:	
+     names are pep lubrif testhiv penet condom
+     race educ hivrisk age;
+     usevariables are pep lubrif testhiv penet condom
+     age race educ hivrisk educ;
+     classes = c (2);
+     categorical = pep lubrif testhiv penet condom;
+
+
+ANALYSIS:	
+   type = mixture;
+   STARTS = 1000 100;
+   STITERATIONS = 20;
+
+MODEL:
+       %OVERALL%
+        c on age race educ hivrisk;
+
+OUTPUT:  CINTERVAL;
+

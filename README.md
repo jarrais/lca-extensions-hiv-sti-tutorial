@@ -89,9 +89,15 @@ The scripts include comments explaining the main analytical steps, model specifi
 
 ### `Simulated-data/`
 
-The `Simulated-data` directory is a separate top-level folder containing the simulated datasets used by the R scripts and by the corresponding Mplus analyses. These datasets reproduce the structures and variable codings required by the different stages of the analytical workflow while protecting the confidentiality of the original study participants.
+The `Simulated-data/` directory is a separate top-level folder containing the simulated datasets used by the R scripts and the corresponding Mplus analyses. Each dataset was prepared for a specific stage of the analytical workflow:
 
-Keeping the simulated datasets in this dedicated directory separates the data files from the analytical code in `Rcode/` and from the Mplus syntax and output files in `Mplus/`.
+- `dataPREP-sim-v0.dat` is used for the unconditional latent class analysis (LCA);
+- `dataPREP-sim-v1.dat` is used for the latent class analysis with covariates; and
+- `dataPREP-sim-v2.dat` is used for the models involving distal outcomes.
+
+These datasets reproduce the structures and variable coding required by the corresponding analyses while protecting the confidentiality of the original study participants. Results obtained from the simulated datasets are not expected to exactly match those reported in the manuscript using the original data.
+
+Keeping the simulated datasets in a dedicated directory separates the data files from the analytical code in `Rcode/` and from the Mplus syntax and output files in `Mplus/`.
 
 ## Mplus files and manuscript tables
 

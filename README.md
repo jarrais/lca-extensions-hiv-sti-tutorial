@@ -153,11 +153,7 @@ To support transparency and reproducibility, this repository includes:
 
 1. a synthetic dataset with the same analytical structure as the original data
 
-2. a data dictionary describing the variables used in the analyses
-
-3. variable coding information
-
-4. complete scripts for all analyses reported in the manuscript
+2. complete scripts for all analyses reported in the manuscript
 
 The synthetic dataset was created exclusively for reproducibility and illustration purposes. Therefore, numerical results obtained from the synthetic data may not exactly match those reported in the manuscript based on the original dataset, but the full analytical pipeline, model specification strategy, and code structure remain reproducible.
 
@@ -181,21 +177,13 @@ The scripts were written to be readable and self explanatory, with comments disc
 
 ## Main analysis files
 
-`01_data_preparation.R` prepares the synthetic analytic dataset and recodes variables used in the models
+`01_packages.R` loads the R packages required for data import, data management, latent class model estimation, and presentation of the results.
 
 `02_lca_measurement_model.R` estimates unconditional latent class models and compares class solutions
 
 `03_lca_with_covariates_onestep.R` fits latent class models with covariates using a one step approach
 
-`04_lca_with_covariates_threestep.R` implements a three step analysis for external variables
-
-`05_bayesian_lca.R` estimates Bayesian latent class models
-
-`06_sensitivity_analysis.R` evaluates the impact of alternative prior specifications and related modeling choices
-
-`07_figures.R` generates manuscript figures
-
-`08_tables.R` generates manuscript tables
+`04_bayesian_lca.R` estimates Bayesian latent class models
 
 ## Software
 

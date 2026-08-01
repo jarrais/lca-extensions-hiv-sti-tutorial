@@ -26,7 +26,8 @@ required_packages <- c(
   "BayesLCA",
   "ggplot2",
   "stringr",
-  "multilevLCA"
+  "multilevLCA",
+  "data.table"
 )
 
 
@@ -60,6 +61,7 @@ library(BayesLCA)
 library(ggplot2)
 library(stringr)
 library(multilevLCA)
+library(data.table)
 
 
 # -------------------------------------------------------------

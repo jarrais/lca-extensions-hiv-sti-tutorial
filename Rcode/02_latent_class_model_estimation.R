@@ -1,24 +1,35 @@
 ###############################################################
 # 02_latent_class_model_estimation.R
 #
-# This script reproduces the latent class analysis (LCA)
-# presented in the manuscript.
-#
-# The goal is to identify latent profiles of HIV prevention
+# Purpose
+# -------
+# This script fits the latent class analysis (LCA) models used
+# in the manuscript to identify profiles of HIV-prevention
 # practices among adolescents in the PrEP15-19 study.
 #
-# The script estimates latent class models with 1 to 4 classes
-# and extracts the information necessary to reproduce:
+# By default, the complete workflow below is configured to run
+# with the SIMULATED dataset distributed with the repository.
+# The simulated data reproduce the structure and coding of the
+# analytical variables without disclosing the original records.
 #
-# Table 2 – Model fit statistics
-# Table 3 – Item-response probabilities by class
+# Main outputs
+# ------------
+# - `table3`: fit statistics for solutions with 1 to 4 classes;
+# - `item_probabilities`: conditional item-response probabilities
+#   for the selected two-class solution.
 #
-# The code is written with extensive comments so that
-# applied researchers in HIV and STI research can follow
-# each step of the analysis.
+# These objects provide the results required to reproduce:
+# - Table 3: model-fit statistics;
+# - Table 4: item-response probabilities by latent class.
 #
-# This script assumes that:
-# 1. 01_packages.R has already been executed
+# Requirements
+# ------------
+# 1. Run this script from the root directory of the repository.
+# 2. Run `01_packages.R` first, or otherwise load/install the
+#    packages used below (`data.table`, `dplyr`, `tibble`,
+#    `poLCA`, and `poLCAParallel`).
+# 3. Store the simulated input file at:
+#    `simulated-data/dataPREP-sim-v0.dat`.
 ###############################################################
 
 # -------------------------------------------------------------
@@ -27,9 +38,27 @@
 
 # The synthetic dataset included in this repository mirrors the
 # structure of the original PrEP15-19 dataset used in the paper.
+base <- fread(
+  "Simulated-data/dataPREP-sim-v0.dat",
+  header = FALSE,
+  col.names = c("pep", "lubrif", "testhiv",	"penet", "condom", "X")
+)
 
-base <- readxl::read_xlsx("data/prep1519_synthetic.xlsx")
-base = read_xlsx(path = "/Users/jonyarrais/Documents/UFF/Projetos/LCA Leila/Bancos Enviado pela Fabi/Base analise sem missing 724 pessoas.xlsx")
+base
+
+
+base = base |> dplyr::select(-X)
+
+
+# In the distributed simulated file, the indicators are coded as
+# 0/1. poLCA requires categorical response levels to be positive
+# consecutive integers; therefore, recode 0 -> 1 and 1 -> 2.
+# Missing values, if present, remain missing after this operation.
+base[, c("pep", "lubrif", "testhiv", "penet", "condom") :=
+        lapply(.SD, \(x) x + 1),
+      .SDcols = c("pep", "lubrif", "testhiv", "penet", "condom")]
+
+base
 
 # -------------------------------------------------------------
 # 2. Entropy function
@@ -67,8 +96,8 @@ form_lca <- cbind(
   pep,
   lubrif,
   testhiv,
-  gouinag,
-  camcaspa
+  penet,
+  condom
 ) ~ 1
 
 
@@ -160,10 +189,10 @@ blrt_3_4 <- blrt(model_null = model_lca_3,
 blrt_3_4$p_value
 
 # -------------------------------------------------------------
-# 10. Extract results for Table 2
+# 10. Extract results for Table 3
 # -------------------------------------------------------------
 
-table2 <- tibble(
+table3 <- tibble(
   
   Classes = 1:4,
   
@@ -196,10 +225,10 @@ table2 <- tibble(
   )
 )
 
-table2
+table3
 
 # -------------------------------------------------------------
-# 11. Extract results for Table 3
+# 11. Extract results for Table 4
 # -------------------------------------------------------------
 
 # Conditional item probabilities for the selected model

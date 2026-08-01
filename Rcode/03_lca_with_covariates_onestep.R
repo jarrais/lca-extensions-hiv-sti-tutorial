@@ -14,14 +14,39 @@
 #
 # This script assumes that:
 # 1. 01_packages.R has already been executed
-# 2. 02_latent_class_model_estimation.R has already been executed
 # 3. the object base is already available in the session
 ###############################################################
 
 
 # -------------------------------------------------------------
-# 1. Specify the one step LCA model with covariates
+# 1. Load the dataset
 # -------------------------------------------------------------
+
+# The synthetic dataset included in this repository mirrors the
+# structure of the original PrEP15-19 dataset used in the paper.
+base <- fread(
+  "Simulated-data/dataPREP-sim-v1.dat",
+  header = FALSE,
+  col.names = c("pep", "lubrif", "testhiv",	"penet", "condom", "age", "race", "educ", "hivrisk", "classe")
+)
+
+base
+
+# In the distributed simulated file, the indicators are coded as
+# 0/1. poLCA requires categorical response levels to be positive
+# consecutive integers; therefore, recode 0 -> 1 and 1 -> 2.
+# Missing values, if present, remain missing after this operation.
+base[, c("pep", "lubrif", "testhiv",	"penet", "condom", "age", "race", "educ", "hivrisk", "classe") :=
+       lapply(.SD, \(x) x + 1),
+     .SDcols = c("pep", "lubrif", "testhiv",	"penet", "condom", "age", "race", "educ", "hivrisk", "classe")]
+
+base
+
+
+# -------------------------------------------------------------
+# 2. Specify the one step LCA model with covariates
+# -------------------------------------------------------------
+
 
 # The indicators define the latent classes.
 # The variables on the right side of the formula are covariates
@@ -31,13 +56,13 @@ form_lca_cov <- cbind(
   pep,
   lubrif,
   testhiv,
-  gouinag,
-  camcaspa
-) ~ idade + raca + escol + riscper2
+  penet,
+  condom
+) ~ age + race + educ + hivrisk
 
 
 # -------------------------------------------------------------
-# 2. Fit the one step model
+# 3. Fit the one step model
 # -------------------------------------------------------------
 
 # Main arguments used in poLCA:
@@ -70,7 +95,7 @@ model_lca_cov_onestep <- poLCA::poLCA(
 )
 
 # -------------------------------------------------------------
-# 3. Extract regression coefficients automatically
+# 4. Extract regression coefficients automatically
 # -------------------------------------------------------------
 
 # In poLCA, the regression coefficients for class membership
@@ -91,7 +116,7 @@ coef_se = coef_se[-1,]
 
 
 # -------------------------------------------------------------
-# 4. Organize results for interpretation
+# 5. Organize results for interpretation
 # -------------------------------------------------------------
 
 # Convert coefficients to odds ratios and 95 percent confidence intervals.
@@ -109,13 +134,11 @@ plot_df <- tibble::tibble(
     hi = exp(estimate + 1.96 * se)
   )
 
-
 # -------------------------------------------------------------
-# 5. Create clearer labels for the plot
+# 6. Create clearer labels for the plot
 # -------------------------------------------------------------
 
 # Edit these labels if your coding changes in another dataset.
-
 term_labels <- c(
   idade = "Age 18 to 19 years",
   raca = "White race",
@@ -129,11 +152,25 @@ plot_df <- plot_df %>%
     term_label = factor(term_label, levels = rev(term_label))
   )
 
-plot_df
+# -------------------------------------------------------------
+# 7. Table 5 with results
+# -------------------------------------------------------------
+
+table_onestep_or <- plot_df %>%
+  dplyr::transmute(
+    Covariate = term_label,
+    Estimate = estimate,
+    SE = se,
+    OR = OR,
+    CI_low = lo,
+    CI_high = hi
+  )
+
+table_onestep_or
 
 
 # -------------------------------------------------------------
-# 6. Forest plot of odds ratios
+# 7. Optional Forest plot of odds ratios
 # -------------------------------------------------------------
 
 fig_onestep_or <- ggplot(plot_df, aes(x = OR, y = term_label)) +
@@ -154,18 +191,3 @@ fig_onestep_or <- ggplot(plot_df, aes(x = OR, y = term_label)) +
 
 fig_onestep_or
 
-# -------------------------------------------------------------
-# 7. Optional table with results
-# -------------------------------------------------------------
-
-table_onestep_or <- plot_df %>%
-  dplyr::transmute(
-    Covariate = term_label,
-    Estimate = estimate,
-    SE = se,
-    OR = OR,
-    CI_low = lo,
-    CI_high = hi
-  )
-
-table_onestep_or

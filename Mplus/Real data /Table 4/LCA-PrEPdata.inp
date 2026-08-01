@@ -1,0 +1,30 @@
+TITLE:
+  Latent Class Analysis (LCA) for HIV Prevention Behaviors
+
+  Data - (Unavailable) PrEP dataset
+  Method - (Unconditional) latent class model
+  Reproduces the results reported in Table 4 of the manuscript
+  Amorim, Arrais et al (2026)
+ 
+ 
+DATA:	
+   file is PrEPdata.txt;
+
+VARIABLE:	
+   names are pep lubrif testhiv	penet condom
+     race educ hivrisk age;
+   usevariables are pep lubrif testhiv	penet condom;
+   classes = c (2);
+   categorical = pep lubrif testhiv	penet condom;
+
+ANALYSIS:	
+   type = mixture;
+   STARTS = 1000 100;
+   STITERATIONS = 20;
+
+PLOT:
+  type = plot3;
+     series = pep lubrif testhiv penet condom(*);
+
+OUTPUT: tech10 tech11 tech14;
+

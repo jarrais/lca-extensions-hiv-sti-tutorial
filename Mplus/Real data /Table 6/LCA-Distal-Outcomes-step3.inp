@@ -1,0 +1,58 @@
+TITLE: Model with Distal Outcomes
+  Application - Analysis of Data from PrEP1519 Study (Brazil)
+  Objective -  Evaluate the effects of HIV prevention practices on PrEP initiation 
+  Reproduces the results presented in Table 6 of the manuscript (BCH)
+  Amorim, Arrais et al (2026)
+  (Based on Muthen/Asparouhov 
+       McLarnon and O'neil -Supplement A9(2018) - Step 3
+
+DATA: FILE IS "PrEPdata-3STEP.dat";
+
+VARIABLE:
+   NAMES ARE 
+      id prep age race educ
+      hivrisk  pep lubrif testhiv 
+      penet condom  CPROB1 CPROB2 CX;
+
+      id prep age race educ
+                hivrisk  pep lubrif testhiv 
+                penet condom;
+
+   USEVARIABLES ARE prep CX;
+
+   CATEGORICAL = prep;
+   NOMINAL = CX;
+
+   CLASSES = c(2);
+
+   MISSING = ALL (9999);
+
+ANALYSIS:
+   TYPE = MIXTURE;
+   STARTS = 0;
+   ESTIMATOR = MLR;
+   ALGORITHM=INTEGRATION;
+
+MODEL:
+     %OVERALL%
+        [c#1*-1.279];
+       
+    %c#1%
+      [CX#1@0.346];
+      [prep$1] (t1);
+
+   %c#2%
+      [CX#1@-2.459];
+      [prep$1] (t2);
+
+  MODEL CONSTRAINT:
+     NEW(p1 p2 OR_2vs1);
+
+   p1 = 1/(1 + EXP(t1));
+   p2 = 1/(1 + EXP(t2));
+
+   OR_2vs1 = EXP(t1 - t2);
+
+OUTPUT: CINTERVAL;
+    
+    

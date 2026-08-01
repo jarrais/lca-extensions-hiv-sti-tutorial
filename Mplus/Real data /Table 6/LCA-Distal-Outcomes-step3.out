@@ -1,0 +1,347 @@
+Mplus VERSION 9.1
+MUTHEN & MUTHEN
+06/17/2026   7:34 PM
+
+INPUT INSTRUCTIONS
+
+   TITLE: Model with Distal Outcomes
+            Application - Analysis of Data from PrEP1519 Study (Brazil)
+            Objective -  Evaluate the effects of HIV prevention practices on PrEP initiation 
+            Reproduces the results presented in Table 6 of the manuscript (BCH)
+            Amorim, Arrais et al (2026)
+            (Based on Muthen/Asparouhov 
+            McLarnon and O'neil -Supplement A9(2018) - Step 3
+
+
+
+  DATA: FILE IS "PrEPdata-3STEP.dat";
+
+  VARIABLE:
+   NAMES ARE 
+      id prep age race educ
+      hivrisk  pep lubrif testhiv 
+      penet condom  CPROB1 CPROB2 CX;
+
+   USEVARIABLES ARE prep CX;
+
+   CATEGORICAL = prep;
+   NOMINAL = CX;
+
+   CLASSES = c(2);
+
+   MISSING = ALL (9999);
+
+  ANALYSIS:
+   TYPE = MIXTURE;
+   STARTS = 0;
+   ESTIMATOR = MLR;
+   ALGORITHM=INTEGRATION;
+
+  MODEL:
+     %OVERALL%
+        [c#1*-1.279];
+       
+    %c#1%
+      [CX#1@0.346];
+      [prep$1] (t1);
+
+   %c#2%
+      [CX#1@-2.459];
+      [prep$1] (t2);
+
+  MODEL CONSTRAINT:
+     NEW(p1 p2 OR_2vs1);
+
+   p1 = 1/(1 + EXP(t1));
+   p2 = 1/(1 + EXP(t2));
+
+   OR_2vs1 = EXP(t1 - t2);
+
+  OUTPUT: CINTERVAL;
+    
+
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!  Selected output excerpts (.out) reproducing Table 6
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+INPUT READING TERMINATED NORMALLY
+
+
+
+Model with Distal Outcomes
+Application - Analysis of Data from PrEP1519 Study (Brazil)
+Objective -  Evaluate the effects of HIV prevention practices on PrEP initiation 
+Reproduces the results presented in Table 6 of the manuscript (BCH)
+Amorim, Arrais et al (2026)
+(Based on Muthen/Asparouhov 
+McLarnon and O'neil -Supplement A9(2018) - Step 3
+
+
+SUMMARY OF ANALYSIS
+
+Number of groups                                                 1
+Number of observations                                         724
+
+Number of dependent variables                                    2
+Number of independent variables                                  0
+Number of continuous latent variables                            0
+Number of categorical latent variables                           1
+
+Observed dependent variables
+
+  Binary and ordered categorical (ordinal)
+   PREP
+
+  Unordered categorical (nominal)
+   CX
+
+Categorical latent variables
+   C
+
+
+Estimator                                                      MLR
+Information matrix                                        OBSERVED
+Optimization Specifications for the Quasi-Newton Algorithm for
+Continuous Outcomes
+  Maximum number of iterations                                 100
+  Convergence criterion                                  0.100D-05
+Optimization Specifications for the EM Algorithm
+  Maximum number of iterations                                 500
+  Convergence criteria
+    Loglikelihood change                                 0.100D-02
+    Relative loglikelihood change                        0.100D-05
+    Derivative                                           0.100D-02
+Optimization Specifications for the M step of the EM Algorithm for
+Categorical Latent Variables
+  Number of M step iterations                                    1
+  M step convergence criterion                           0.100D-02
+  Basis for M step termination                           ITERATION
+Optimization Specifications for the M step of the EM Algorithm for
+Censored, Binary or Ordered Categorical (Ordinal), Unordered
+Categorical (Nominal) and Count Outcomes
+  Number of M step iterations                                    1
+  M step convergence criterion                           0.100D-02
+  Basis for M step termination                           ITERATION
+  Maximum value for logit thresholds                            15
+  Minimum value for logit thresholds                           -15
+  Minimum expected cell size for chi-square              0.100D-01
+Maximum number of iterations for H1                           2000
+Convergence criterion for H1                             0.100D-03
+Optimization algorithm                                         EMA
+Integration Specifications
+  Type                                                    STANDARD
+  Number of integration points                                  15
+  Dimensions of numerical integration                            0
+  Adaptive quadrature                                           ON
+Link                                                         LOGIT
+Cholesky                                                       OFF
+
+Input data file(s)
+  DataM3STEP.dat
+Input data format  FREE
+
+
+SUMMARY OF DATA
+
+     Number of missing data patterns             1
+     Number of y missing data patterns           0
+     Number of u missing data patterns           1
+
+
+COVARIANCE COVERAGE OF DATA
+
+Minimum covariance coverage value   0.100
+
+
+UNIVARIATE PROPORTIONS AND COUNTS FOR CATEGORICAL VARIABLES
+
+    PREP
+      Category 1    0.888          643.000
+      Category 2    0.112           81.000
+    CX
+      Category 1    0.189          137.000
+      Category 2    0.811          587.000
+
+
+
+THE MODEL ESTIMATION TERMINATED NORMALLY
+
+
+
+MODEL FIT INFORMATION
+
+Number of Free Parameters                        3
+
+Loglikelihood
+
+          H0 Value                        -604.900
+          H0 Scaling Correction Factor      0.9983
+            for MLR
+
+Information Criteria
+
+          Akaike (AIC)                    1215.799
+          Bayesian (BIC)                  1229.553
+          Sample-Size Adjusted BIC        1220.028
+            (n* = (n + 2) / 24)
+
+Chi-Square Test of Model Fit for the Binary and Ordered Categorical
+(Ordinal) Outcomes
+
+          Pearson Chi-Square
+
+          Value                              0.000
+          Degrees of freedom cannot be computed for this model part.
+
+          Likelihood Ratio Chi-Square
+
+          Value                              0.000
+          Degrees of freedom cannot be computed for this model part.
+
+
+
+FINAL CLASS COUNTS AND PROPORTIONS FOR THE LATENT CLASSES
+BASED ON THE ESTIMATED MODEL
+
+    Latent
+   Classes
+
+       1        157.75108          0.21789
+       2        566.24892          0.78211
+
+
+FINAL CLASS COUNTS AND PROPORTIONS FOR THE LATENT CLASSES
+BASED ON ESTIMATED POSTERIOR PROBABILITIES
+
+    Latent
+   Classes
+
+       1        157.75108          0.21789
+       2        566.24892          0.78211
+
+
+FINAL CLASS COUNTS AND PROPORTIONS FOR THE LATENT CLASSES
+BASED ON THEIR MOST LIKELY LATENT CLASS MEMBERSHIP
+
+Class Counts and Proportions
+
+    Latent
+   Classes
+
+       1              137          0.18923
+       2              587          0.81077
+
+
+CLASSIFICATION QUALITY
+
+     Entropy                         0.419
+
+
+Average Latent Class Probabilities for Most Likely Latent Class Membership (Row)
+by Latent Class (Column)
+
+           1        2
+
+    1   0.674    0.326
+    2   0.111    0.889
+
+
+Classification Probabilities for the Most Likely Latent Class Membership (Column)
+by Latent Class (Row)
+
+           1        2
+
+    1   0.586    0.414
+    2   0.079    0.921
+
+
+Logits for the Classification Probabilities for the Most Likely Latent Class Membership (Column)
+by Latent Class (Row)
+
+              1        2
+
+    1      0.346    0.000
+    2     -2.459    0.000
+
+
+MODEL RESULTS
+
+                                                    Two-Tailed
+                    Estimate       S.E.  Est./S.E.    P-Value
+
+Latent Class 1
+
+ Means
+    CX#1               0.346      0.000    999.000    999.000
+
+ Thresholds
+    PREP$1             1.980      0.412      4.810      0.000
+
+Latent Class 2
+
+ Means
+    CX#1              -2.459      0.000    999.000    999.000
+
+ Thresholds
+    PREP$1             2.099      0.169     12.435      0.000
+
+Categorical Latent Variables
+
+ Means
+    C#1               -1.278      0.169     -7.583      0.000
+
+New/Additional Parameters
+    P1                 0.121      0.044      2.765      0.006
+    P2                 0.109      0.016      6.653      0.000
+    OR_2VS1            0.888      0.457      1.942      0.052
+
+
+QUALITY OF NUMERICAL RESULTS
+
+     Condition Number for the Information Matrix              0.190E-01
+       (ratio of smallest to largest eigenvalue)
+
+
+LATENT CLASS INDICATOR MEANS AND PROBABILITIES FOR EACH LATENT CLASS
+
+     MEAN/PROBABILITY PROFILES FOR C
+                   Latent class
+                     1      2
+     PREP
+       Category 1  0.879  0.891
+       Category 2  0.121  0.109
+
+
+EQUALITY TESTS OF PROBABILITIES ACROSS THE LATENT CLASSES
+
+                    Chi-Square     P-Value   Degrees of Freedom
+
+
+PREP
+  Overall test          0.053      0.818        1
+
+
+
+DIAGRAM INFORMATION
+
+  Mplus diagrams are currently not available for Mixture analysis.
+  No diagram output was produced.
+
+
+     Beginning Time:  19:34:00
+        Ending Time:  19:34:00
+       Elapsed Time:  00:00:00
+
+
+
+MUTHEN & MUTHEN
+3463 Stoner Ave.
+Los Angeles, CA  90066
+
+Tel: (310) 391-9971
+Fax: (310) 391-8971
+Web: www.StatModel.com
+Support: Support@StatModel.com
+
+Copyright (c) 1998-2026 Muthen & Muthen

@@ -1,0 +1,50 @@
+TITLE:	Model with Distal Outcomes  - Step 1
+
+    Data- Simulated PrEP dataset
+    (designed to resemble the characteristics of the original data)
+    
+    Note -    The simulated dataset approximates the structure
+    and characteristics of the original data but does not
+    reproduce the original observations. Consequently,
+    parameter estimates and fit statistics will differ
+    from those reported in the manuscript.
+
+
+ DATA:	
+     file is dataPREP-sim-v2.dat;
+
+  VARIABLE:	
+     NAMES are  pep lubrif testhiv
+       	penet  condom prep;
+     USEVAR ARE pep lubrif testhiv
+       	penet  condom prep;
+     CLASSES = c (2);
+     CATEGORICAL = pep lubrif testhiv
+       	penet  condom;
+     AUXILIARY = prep;
+     MISSING = ALL (9999);
+
+
+ANALYSIS: TYPE = MIXTURE;
+          STARTS = 100 100;  
+
+MODEL:
+    %OVERALL%
+    ! using start values to speed up
+    ! estimation 
+	! item thresholds by class
+
+      %c#1%
+       [pep$1*2.226 lubrif$1*0.493 testhiv$1*5.042
+        penet$1*2.009  condom$1*15.000];
+
+  
+    %c#2%
+       [pep$1*2.472 lubrif$1*-1.379 testhiv$1*2.369
+        penet$1*1.494 condom$1*-0.658];
+
+SAVEDATA: FILE = PrEPdata-3STEP-sim.dat;
+          SAVE = cprob;
+
+     
+

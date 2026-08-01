@@ -25,7 +25,7 @@
 # The synthetic dataset included in this repository mirrors the
 # structure of the original PrEP15-19 dataset used in the paper.
 base <- fread(
-  "../Simulated-data/dataPREP-sim-v1.dat",
+  "Simulated-data/dataPREP-sim-v1.dat",
   header = FALSE,
   col.names = c("pep", "lubrif", "testhiv",	"penet", "condom", "age", "race", "educ", "hivrisk", "classe")
 )

@@ -123,14 +123,15 @@ Researchers interested in requesting access to the original data should contact 
 To reproduce the workflow in R:
 
 1. clone or download this repository;
-2. open R with the repository root as the working directory;
+2. open the `lca-extensions-hiv-sti-tutorial.Rproj` file in RStudio to ensure that the repository root is set as the working directory;
 3. run the package-loading script in `Rcode/`;
 4. run the LCA script in `Rcode/`;
 5. run the LCA-with-covariates script in `Rcode/`; and
 6. run the Bayesian LCA script in `Rcode/` when reproducing the Bayesian analysis.
 
-The analytical scripts are configured for the appropriate datasets stored in `Simulated-data/`. Package availability, package versions, random starting values, and simulation settings may affect numerical results.
+The `lca-extensions-hiv-sti-tutorial.Rproj` file should be opened before running any of the scripts. This ensures that relative paths are resolved from the repository root and that the scripts can locate the simulated datasets stored in `Simulated-data/`.
 
+The analytical scripts are configured to use the appropriate datasets from `Simulated-data/`. Package availability, package versions, random starting values, and MCMC settings may affect numerical results.
 ### Mplus
 
 To reproduce the Mplus analyses using simulated data, open the appropriate `.inp` file under `Mplus/Simulated data/Table 4`, `Table 5`, or `Table 6` and confirm that its data-file path points to the corresponding dataset stored in `Simulated-data/`.

@@ -1,0 +1,34 @@
+TITLE:	Latent class analysis (LCA) with covariates
+
+    Data- Simulated PrEP dataset
+    (designed to resemble the characteristics of the original data)
+    
+    Note -    The simulated dataset approximates the structure
+    and characteristics of the original data but does not
+    reproduce the original observations. Consequently,
+    parameter estimates and fit statistics will differ
+    from those reported in the manuscript.
+
+ 
+DATA:	
+   file is dataPREP-sim-v1.dat;
+
+VARIABLE:	
+   names are pep lubrif testhiv	penet condom
+   age race educ hivrisk classe;
+   usevariables are pep lubrif testhiv	penet condom
+   age race educ hivrisk;
+   classes = c (2);
+   categorical = pep lubrif testhiv	penet condom;
+
+ANALYSIS:	
+   type = mixture;
+   STARTS = 1000 100;
+   STITERATIONS = 20;
+
+MODEL:
+       %OVERALL%
+        c on age race educ hivrisk;
+
+OUTPUT:  CINTERVAL;
+

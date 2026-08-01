@@ -1,45 +1,150 @@
 # Advancing the Understanding of HIV-Related Behaviors and Prevention Practices Through Latent Class Analysis and Its Extensions
 
-This repository contains code, synthetic data, and supplementary materials for the manuscript:
+This repository contains Mplus files, R scripts, and simulated data developed to accompany the manuscript:
 
 Amorim LD, Arrais J, Soares F, Magno L, Dourado I.  
-Advancing the Understanding of HIV-Related Behaviors and Prevention Practices Through Latent Class Analysis and Its Extensions 
+*Advancing the Understanding of HIV-Related Behaviors and Prevention Practices Through Latent Class Analysis and Its Extensions.*
 
 ## Overview
 
-Latent class analysis (LCA) and its extensions have become increasingly important in HIV and STI research for identifying unobserved subgroups related to prevention practices, risk behaviors, stigma, and care engagement. This repository accompanies our methodological and applied paper and was designed to support transparent and reproducible research.
+Latent class analysis (LCA) and its extensions are useful for identifying unobserved population subgroups characterized by distinct patterns of behaviors or practices. In HIV and sexually transmitted infection (STI) research, these methods can help investigate patterns related to prevention practices, risk behaviors, stigma, and engagement in care.
 
-The main goal of this repository is to allow readers to reproduce the analytical workflow presented in the article using a synthetic dataset that mirrors the structure of the original study data while preserving confidentiality.
+This repository accompanies the methodological and applied analyses presented in the manuscript. It includes Mplus input and output files associated with Tables 4, 5, and 6, annotated R scripts for latent class models and their extensions, and a dedicated `Simulated-data/` directory containing the simulated datasets required to reproduce the analytical workflow without access to confidential participant-level data.
 
-Although this repository is not organized as a standalone tutorial, the scripts were written in a guided and highly annotated style. In addition to reproducing the results, they are intended to help readers understand the main analytical steps, the logic behind model specification, and the role of key function arguments used in each stage of the analysis.
+The simulated datasets follow the analytical structure and variable coding of the original PrEP15-19 data. They were created for reproducibility and methodological illustration and do not contain records from study participants. Consequently, numerical results obtained from the simulated data are not expected to exactly match the results reported in the manuscript using the original data.
 
 ## Purpose of the repository
 
 This repository was created to:
 
-1. reproduce the analyses presented in the paper using a synthetic dataset modeled after the PrEP15 19 study application
-
-2. provide transparent and well documented R scripts that explain the main steps involved in:
-   1. data preparation
-   2. latent class model estimation
-   3. latent class models with covariates
-   4. Bayesian latent class analysis
-   5. sensitivity analyses
-
-3. offer a reproducible example of how methodological work involving sensitive HIV related data can be shared responsibly through synthetic data and detailed code annotation
+1. document the latent class analyses associated with Tables 4, 5, and 6 of the manuscript;
+2. provide the corresponding Mplus syntax and output for analyses based on the original and simulated data;
+3. provide annotated R scripts for conventional and Bayesian latent class analyses using simulated data;
+4. support transparent and reproducible applications of LCA and LCA with covariates in HIV and STI research; and
+5. demonstrate how analytical workflows involving sensitive health data can be shared responsibly through simulated data and detailed code documentation.
 
 ## Repository structure
 
-`data/` contains data documentation, variable coding information, and synthetic datasets used to reproduce the analytical workflow
+```text
+.
+├── Mplus/
+│   ├── Real data/
+│   │   ├── Table 4/
+│   │   │   ├── [Mplus input file].inp
+│   │   │   └── [Mplus output file].out
+│   │   ├── Table 5/
+│   │   │   ├── [Mplus input file].inp
+│   │   │   └── [Mplus output file].out
+│   │   └── Table 6/
+│   │       ├── [Mplus input file].inp
+│   │       └── [Mplus output file].out
+│   └── Simulated data/
+│       ├── Table 4/
+│       │   ├── [Mplus input file].inp
+│       │   └── [Mplus output file].out
+│       ├── Table 5/
+│       │   ├── [Mplus input file].inp
+│       │   └── [Mplus output file].out
+│       └── Table 6/
+│           ├── [Mplus input file].inp
+│           └── [Mplus output file].out
+├── Rcode/
+│   ├── [package-loading script].R
+│   ├── [latent class analysis script].R
+│   ├── [LCA with covariates script].R
+│   └── [Bayesian LCA script].R
+└── Simulated-data/
+    ├── [simulated dataset 1]
+    ├── [simulated dataset 2]
+    └── [...]
+```
 
-`code/` contains all scripts used to prepare the data, estimate the models, and generate tables and figures
+The bracketed filenames in this diagram should be replaced with the exact filenames used in the repository.
 
-`results/` contains model outputs, tables, figures, and other derived files
+### `Mplus/`
 
-## Data availability
+The `Mplus` directory contains the model files associated with Tables 4, 5, and 6 of the manuscript. It is divided into two subdirectories:
 
-The original PrEP15 19 data are not publicly shared through this repository because they contain sensitive information and are subject to ethical and institutional restrictions.
+- `Real data/` contains the Mplus input (`.inp`) and output (`.out`) files for analyses based on the original PrEP15-19 data.
+- `Simulated data/` contains the corresponding Mplus input and output files for analyses based on the simulated data.
 
+Within each subdirectory, files are organized by manuscript table. Each table folder contains an `.inp` file documenting the Mplus syntax and estimation settings and an `.out` file containing the corresponding model results.
+
+The `Real data/` directory contains analysis syntax and model output, but it does **not** contain the original participant-level dataset.
+
+### `Rcode/`
+
+The `Rcode` directory contains four annotated R scripts:
+
+- a script that loads the packages required for the analyses;
+- a script that imports and prepares the simulated data, estimates the latent class models, compares alternative class solutions, and extracts the principal results;
+- a script that fits latent class models with covariates using the simulated data; and
+- a script that performs Bayesian latent class analysis.
+
+The scripts include comments explaining the main analytical steps, model specifications, and relevant function arguments. There is no separate Bayesian sensitivity-analysis script in this repository.
+
+### `Simulated-data/`
+
+The `Simulated-data` directory is a separate top-level folder containing the simulated datasets used by the R scripts and by the corresponding Mplus analyses. These datasets reproduce the structures and variable codings required by the different stages of the analytical workflow while protecting the confidentiality of the original study participants.
+
+Keeping the simulated datasets in this dedicated directory separates the data files from the analytical code in `Rcode/` and from the Mplus syntax and output files in `Mplus/`.
+
+## Mplus files and manuscript tables
+
+For each of Tables 4, 5, and 6, the repository provides:
+
+- the Mplus input and output files generated from the original data, under `Mplus/Real data/`; and
+- the equivalent Mplus input and output files generated from the simulated data, under `Mplus/Simulated data/`.
+
+This organization allows readers to inspect the specifications and reported results based on the original data and to examine the equivalent implementation using the simulated dataset.
+
+## Data availability and confidentiality
+
+The original PrEP15-19 participant-level data are not publicly available through this repository because they contain sensitive information and are subject to ethical and institutional restrictions.
+
+To support reproducibility, the repository provides simulated datasets in `Simulated-data/` with the structures and variable codings required by the analytical scripts. The simulated data were created exclusively for reproducibility, teaching, and methodological illustration. They do not reproduce the original participant records, and results obtained from them may differ from the estimates reported in the manuscript.
+
+Researchers interested in requesting access to the original data should contact the corresponding authors and comply with the applicable ethical, institutional, and data-sharing requirements.
+
+## Reproducing the analyses with simulated data
+
+### R
+
+To reproduce the workflow in R:
+
+1. clone or download this repository;
+2. open R with the repository root as the working directory;
+3. run the package-loading script in `Rcode/`;
+4. run the LCA script in `Rcode/`;
+5. run the LCA-with-covariates script in `Rcode/`; and
+6. run the Bayesian LCA script in `Rcode/` when reproducing the Bayesian analysis.
+
+The analytical scripts are configured for the appropriate datasets stored in `Simulated-data/`. Package availability, package versions, random starting values, and simulation settings may affect numerical results.
+
+### Mplus
+
+To reproduce the Mplus analyses using simulated data, open the appropriate `.inp` file under `Mplus/Simulated data/Table 4`, `Table 5`, or `Table 6` and confirm that its data-file path points to the corresponding dataset stored in `Simulated-data/`.
+
+The `.out` files are included so that the model results can be inspected without rerunning the analyses. A licensed installation of Mplus is required to execute the `.inp` files.
+
+## Software
+
+The analyses were implemented in Mplus and R. The required R packages are documented in the package-loading script located in `Rcode/`.
+
+## Citation
+
+If you use the code or materials from this repository, please cite the manuscript and the corresponding repository release.
+
+## Contact
+
+For questions about the repository or the analytical workflow, please contact:
+
+Jony Arrais Pinto Junior  
+Email: jarrais@id.uff.br
+
+## Acknowledgments
+
+We thank the PrEP15-19 study team and participants for making this work possible.
 To support transparency and reproducibility, this repository includes:
 
 1. a synthetic dataset with the same analytical structure as the original data

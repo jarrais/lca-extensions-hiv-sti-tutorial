@@ -30,33 +30,37 @@ This repository was created to:
 ├── Mplus/
 │   ├── Real data/
 │   │   ├── Table 4/
-│   │   │   ├── [Mplus input file].inp
-│   │   │   └── [Mplus output file].out
+│   │   │   ├── LCA-PrEPdata.inp
+│   │   │   └── LCA-PrEPdata.out
 │   │   ├── Table 5/
-│   │   │   ├── [Mplus input file].inp
-│   │   │   └── [Mplus output file].out
+│   │   │   ├── LCA-cov-PrEPdata.inp
+│   │   │   └── LCA-cov-PrEPdata.out
 │   │   └── Table 6/
-│   │       ├── [Mplus input file].inp
-│   │       └── [Mplus output file].out
+│       │   ├── LCA-Distal-Outcomes-step1.inp
+│       │   └── LCA-Distal-Outcomes-step1.out
+│       │   ├── LCA-Distal-Outcomes-step3.inp
+│       │   └── LCA-Distal-Outcomes-step3.out
 │   └── Simulated data/
 │       ├── Table 4/
-│       │   ├── [Mplus input file].inp
-│       │   └── [Mplus output file].out
+│       │   ├── DataPrEP_LCA-sim.inp
+│       │   └── DataPrEP_LCA-sim.out
 │       ├── Table 5/
-│       │   ├── [Mplus input file].inp
-│       │   └── [Mplus output file].out
+│       │   ├── DataPrEP_LCA-cov-sim.inp
+│       │   └── DataPrEP_LCA-cov-sim.out
 │       └── Table 6/
-│           ├── [Mplus input file].inp
-│           └── [Mplus output file].out
+│           ├── DataPrEP_LCA-distal outcome-sim-step1.inp
+│           └── DataPrEP_LCA-distal outcome-sim-step1.out
+│           ├── DataPrEP_LCA-distal outcome-sim-step3.inp
+│           └── DataPrEP_LCA-distal outcome-sim-step3.out
 ├── Rcode/
-│   ├── [package-loading script].R
-│   ├── [latent class analysis script].R
-│   ├── [LCA with covariates script].R
-│   └── [Bayesian LCA script].R
+│   ├── 01_packages.R
+│   ├── 02_latent_class_model_estimation.R
+│   ├── 03_lca_with_covariates_onestep.R
+│   └── 04_bayesian_latent_class_model.R
 └── Simulated-data/
-    ├── [simulated dataset 1]
-    ├── [simulated dataset 2]
-    └── [...]
+    ├── dataPREP-sim-v0.dat
+    ├── dataPREP-sim-v1.dat
+    └── dataPREP-sim-v2.dat
 ```
 
 The bracketed filenames in this diagram should be replaced with the exact filenames used in the repository.

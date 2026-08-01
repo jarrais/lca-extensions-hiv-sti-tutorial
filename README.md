@@ -36,10 +36,10 @@ This repository was created to:
 │   │   │   ├── LCA-cov-PrEPdata.inp
 │   │   │   └── LCA-cov-PrEPdata.out
 │   │   └── Table 6/
-│       │   ├── LCA-Distal-Outcomes-step1.inp
-│       │   └── LCA-Distal-Outcomes-step1.out
-│       │   ├── LCA-Distal-Outcomes-step3.inp
-│       │   └── LCA-Distal-Outcomes-step3.out
+│   │   │   ├── LCA-Distal-Outcomes-step1.inp
+│   │   │   └── LCA-Distal-Outcomes-step1.out
+│   │   │   ├── LCA-Distal-Outcomes-step3.inp
+│   │   │   └── LCA-Distal-Outcomes-step3.out
 │   └── Simulated data/
 │       ├── Table 4/
 │       │   ├── DataPrEP_LCA-sim.inp

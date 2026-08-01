@@ -1,0 +1,60 @@
+TITLE:	Model with Distal Outcomes  - Step 3
+    Data- Simulated PrEP dataset
+    (designed to resemble the characteristics of the original data)
+    
+    Note -    The simulated dataset approximates the structure
+    and characteristics of the original data but does not
+    reproduce the original observations. Consequently,
+    parameter estimates and fit statistics will differ
+    from those reported in the manuscript.
+
+DATA: FILE IS "PrEPdata-3STEP-sim.dat";
+
+VARIABLE:
+   NAMES ARE 
+      pep lubrif testhiv
+      penet  condom prep
+      CPROB1 CPROB2 CX;
+
+    USEVARIABLES ARE prep CX;
+
+   CATEGORICAL = prep;
+   NOMINAL = CX;
+
+   CLASSES = c(2);
+
+   MISSING = ALL (9999);
+
+ANALYSIS:
+   TYPE = MIXTURE;
+   STARTS = 0;
+   ESTIMATOR = MLR;
+   ALGORITHM=INTEGRATION;
+
+MODEL:
+     %OVERALL%
+        [c#1*0.447];
+
+! The fixed values for CX were obtained from 
+! the "Logits for the Classification Probabilities
+! for the Most Likely Latent Class Membership" 
+! table in the Step 1 LCA output.       
+    %c#1%
+      [CX#1@5.511];
+      [prep$1] (t1);
+
+   %c#2%
+      [CX#1@-0.774];
+      [prep$1] (t2);
+
+  MODEL CONSTRAINT:
+     NEW(p1 p2 OR_2vs1);
+
+   p1 = 1/(1 + EXP(t1));
+   p2 = 1/(1 + EXP(t2));
+
+   OR_2vs1 = EXP(t1 - t2);
+
+OUTPUT: CINTERVAL;
+    
+    

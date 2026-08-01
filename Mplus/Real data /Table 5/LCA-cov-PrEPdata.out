@@ -1,0 +1,486 @@
+Mplus VERSION 9.1
+MUTHEN & MUTHEN
+07/30/2026  10:27 PM
+
+INPUT INSTRUCTIONS
+
+
+  TITLE:
+    Latent Class Analysis (LCA) with Covariates
+    Application - Analysis of Data from PrEP1519 Study (Brazil)
+    Objective -  Evaluate the effects of risk factors
+                 on latent profiles of HIV prevention practices
+    Reproduces the results presented in Table 5 of the manuscript
+    Amorim, Arrais et al (2026)
+
+  DATA:	
+     file is PrEPdata.txt;
+
+  VARIABLE:	
+     names are pep lubrif testhiv penet condom
+     race educ hivrisk age;
+     usevariables are pep lubrif testhiv penet condom
+     age race educ hivrisk educ;
+     classes = c (2);
+     categorical = pep lubrif testhiv penet condom;
+
+  ANALYSIS:	
+     type = mixture;
+     STARTS = 1000 100;
+     STITERATIONS = 20;
+
+  MODEL:
+         %OVERALL%
+          c on age race educ hivrisk;
+
+  OUTPUT:  CINTERVAL;
+
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!  Selected output excerpts (.out) reproducing Table 4
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+Latent Class Analysis (LCA) with Covariates
+Application - Analysis of Data from PrEP1519 Study (Brazil)
+Objective -  Evaluate the effects of risk factors
+on latent profiles of HIV prevention practices
+Reproduces the results presented in Table 5 of the manuscript
+Amorim, Arrais et al (2026)
+
+SUMMARY OF ANALYSIS
+
+Number of groups                                                 1
+Number of observations                                         724
+
+Number of dependent variables                                    5
+Number of independent variables                                  4
+Number of continuous latent variables                            0
+Number of categorical latent variables                           1
+
+Observed dependent variables
+
+  Binary and ordered categorical (ordinal)
+   PEP         LUBRIF      TESTHIV     PENET       CONDOM
+
+Observed independent variables
+   AGE         RACE        EDUC        HIVRISK
+
+Categorical latent variables
+   C
+
+
+Estimator                                                      MLR
+Information matrix                                        OBSERVED
+Optimization Specifications for the Quasi-Newton Algorithm for
+Continuous Outcomes
+  Maximum number of iterations                                 100
+  Convergence criterion                                  0.100D-05
+Optimization Specifications for the EM Algorithm
+  Maximum number of iterations                                 500
+  Convergence criteria
+    Loglikelihood change                                 0.100D-06
+    Relative loglikelihood change                        0.100D-06
+    Derivative                                           0.100D-05
+Optimization Specifications for the M step of the EM Algorithm for
+Categorical Latent Variables
+  Number of M step iterations                                    1
+  M step convergence criterion                           0.100D-05
+  Basis for M step termination                           ITERATION
+Optimization Specifications for the M step of the EM Algorithm for
+Censored, Binary or Ordered Categorical (Ordinal), Unordered
+Categorical (Nominal) and Count Outcomes
+  Number of M step iterations                                    1
+  M step convergence criterion                           0.100D-05
+  Basis for M step termination                           ITERATION
+  Maximum value for logit thresholds                            15
+  Minimum value for logit thresholds                           -15
+  Minimum expected cell size for chi-square              0.100D-01
+Optimization algorithm                                         EMA
+Random Starts Specifications
+  Number of initial stage random starts                       1000
+  Number of final stage optimizations                          100
+  Number of initial stage iterations                            20
+  Initial stage convergence criterion                    0.100D+01
+  Random starts scale                                    0.500D+01
+  Random seed for generating random starts                       0
+Link                                                         LOGIT
+
+Input data file(s)
+  PrEPdata.txt
+Input data format  FREE
+
+
+UNIVARIATE PROPORTIONS AND COUNTS FOR CATEGORICAL VARIABLES
+
+    PEP
+      Category 1    0.888          643.000
+      Category 2    0.112           81.000
+    LUBRIF
+      Category 1    0.318          230.000
+      Category 2    0.682          494.000
+    TESTHIV
+      Category 1    0.912          660.000
+      Category 2    0.088           64.000
+    PENET
+      Category 1    0.831          602.000
+      Category 2    0.169          122.000
+    CONDOM
+      Category 1    0.601          435.000
+      Category 2    0.399          289.000
+
+
+
+UNIVARIATE SAMPLE STATISTICS
+
+
+     UNIVARIATE HIGHER-ORDER MOMENT DESCRIPTIVE STATISTICS
+
+         Variable/         Mean/     Skewness/   Minimum/ % with                Percentiles
+        Sample Size      Variance    Kurtosis    Maximum  Min/Max      20%/60%    40%/80%    Median
+
+     AGE                   1.239       1.224       1.000   76.10%       1.000      1.000      1.000
+             724.000       0.182      -0.501       2.000   23.90%       1.000      2.000
+     RACE                  1.725      -1.009       1.000   27.49%       1.000      2.000      2.000
+             724.000       0.199      -0.983       2.000   72.51%       2.000      2.000
+     EDUC                  1.557      -0.228       1.000   44.34%       1.000      1.000      2.000
+             724.000       0.247      -1.948       2.000   55.66%       2.000      2.000
+     HIVRISK               1.243       1.198       1.000   75.69%       1.000      1.000      1.000
+             724.000       0.184      -0.565       2.000   24.31%       1.000      2.000
+
+
+     VIF (VARIANCE INFLATION FACTOR) FOR EXPLORING MULTICOLLINEARITY OF INDEPENDENT VARIABLES
+
+     Variable        VIF       Variable        VIF       Variable        VIF
+
+     AGE            1.130      RACE           1.022      EDUC           1.148
+     HIVRISK        1.005
+
+RANDOM STARTS RESULTS RANKED FROM THE BEST TO THE WORST LOGLIKELIHOOD VALUES
+
+Final stage loglikelihood values at local maxima, seeds, and initial stage start numbers:
+
+           -1717.261  393232           152
+           -1717.261  514326           325
+           -1717.261  173191           422
+           -1717.261  856536           144
+              ....
+           
+           -1717.895  282464           283
+           -1717.895  93468            3
+           -1717.895  691234           250
+           -1717.895  488581           688
+
+     IN THE OPTIMIZATION, ONE OR MORE LOGIT THRESHOLDS APPROACHED EXTREME VALUES
+     OF -15.000 AND 15.000 AND WERE FIXED TO STABILIZE MODEL ESTIMATION.  THESE
+     VALUES IMPLY PROBABILITIES OF 0 AND 1.  IN THE MODEL RESULTS SECTION, THESE
+     PARAMETERS HAVE 0 STANDARD ERRORS AND 999 IN THE Z-SCORE AND P-VALUE COLUMNS.
+
+THE BEST LOGLIKELIHOOD VALUE HAS BEEN REPLICATED.  RERUN WITH AT LEAST TWICE THE
+RANDOM STARTS TO CHECK THAT THE BEST LOGLIKELIHOOD IS STILL OBTAINED AND REPLICATED.
+
+
+THE MODEL ESTIMATION TERMINATED NORMALLY
+
+MODEL FIT INFORMATION
+
+Number of Free Parameters                       15
+
+Loglikelihood
+
+          H0 Value                       -1717.261
+          H0 Scaling Correction Factor      1.2484
+            for MLR
+
+Information Criteria
+
+          Akaike (AIC)                    3464.523
+          Bayesian (BIC)                  3533.295
+          Sample-Size Adjusted BIC        3485.665
+            (n* = (n + 2) / 24)
+
+Chi-Square Test of Model Fit for the Binary and Ordered Categorical
+(Ordinal) Outcomes
+
+          Pearson Chi-Square
+
+          Value                             27.765
+          Degrees of Freedom                    20
+          P-Value                           0.1151
+
+          Likelihood Ratio Chi-Square
+
+          Value                             26.885
+          Degrees of Freedom                    20
+          P-Value                           0.1385
+
+
+
+FINAL CLASS COUNTS AND PROPORTIONS FOR THE LATENT CLASSES
+BASED ON THE ESTIMATED MODEL
+
+    Latent
+   Classes
+
+       1        455.12766          0.62863
+       2        268.87234          0.37137
+
+
+FINAL CLASS COUNTS AND PROPORTIONS FOR THE LATENT CLASSES
+BASED ON ESTIMATED POSTERIOR PROBABILITIES
+
+    Latent
+   Classes
+
+       1        455.12765          0.62863
+       2        268.87235          0.37137
+
+
+FINAL CLASS COUNTS AND PROPORTIONS FOR THE LATENT CLASSES
+BASED ON THEIR MOST LIKELY LATENT CLASS MEMBERSHIP
+
+Class Counts and Proportions
+
+    Latent
+   Classes
+
+       1              499          0.68923
+       2              225          0.31077
+
+
+CLASSIFICATION QUALITY
+
+     Entropy                         0.328
+
+
+Average Latent Class Probabilities for Most Likely Latent Class Membership (Row)
+by Latent Class (Column)
+
+           1        2
+
+    1   0.791    0.209
+    2   0.269    0.731
+
+
+Classification Probabilities for the Most Likely Latent Class Membership (Column)
+by Latent Class (Row)
+
+           1        2
+
+    1   0.867    0.133
+    2   0.388    0.612
+
+
+Logits for the Classification Probabilities for the Most Likely Latent Class Membership (Column)
+by Latent Class (Row)
+
+              1        2
+
+    1      1.875    0.000
+    2     -0.455    0.000
+
+
+MODEL RESULTS
+
+                                                    Two-Tailed
+                    Estimate       S.E.  Est./S.E.    P-Value
+
+Latent Class 1
+
+ Thresholds
+    PEP$1              1.963      0.374      5.255      0.000
+    LUBRIF$1          -1.423      0.231     -6.171      0.000
+    TESTHIV$1          1.810      0.430      4.205      0.000
+    PENET$1            1.295      0.352      3.679      0.000
+    CONDOM$1          -0.155      0.168     -0.920      0.358
+
+Latent Class 2
+
+ Thresholds
+    PEP$1              2.280      0.641      3.559      0.000
+    LUBRIF$1           0.107      0.729      0.147      0.883
+    TESTHIV$1         15.000      0.000    999.000    999.000
+    PENET$1            2.317      0.545      4.250      0.000
+    CONDOM$1           1.636      1.449      1.129      0.259
+
+Categorical Latent Variables
+
+ C#1        ON
+    AGE               -0.786      0.667     -1.178      0.239
+    RACE              -0.228      0.407     -0.560      0.575
+    EDUC               0.476      0.433      1.100      0.271
+    HIVRISK           -0.538      0.419     -1.285      0.199
+
+ Intercepts
+    C#1                1.850      1.255      1.475      0.140
+
+
+QUALITY OF NUMERICAL RESULTS
+
+     Condition Number for the Information Matrix              0.126E-02
+       (ratio of smallest to largest eigenvalue)
+
+
+
+RESULTS IN PROBABILITY SCALE
+
+                                                    Two-Tailed
+                    Estimate       S.E.  Est./S.E.    P-Value
+
+Latent Class 1
+
+ PEP
+    Category 1         0.877      0.040     21.736      0.000
+    Category 2         0.123      0.040      3.053      0.002
+ LUBRIF
+    Category 1         0.194      0.036      5.379      0.000
+    Category 2         0.806      0.036     22.333      0.000
+ TESTHIV
+    Category 1         0.859      0.052     16.521      0.000
+    Category 2         0.141      0.052      2.703      0.007
+ PENET
+    Category 1         0.785      0.059     13.214      0.000
+    Category 2         0.215      0.059      3.620      0.000
+ CONDOM
+    Category 1         0.461      0.042     11.018      0.000
+    Category 2         0.539      0.042     12.864      0.000
+
+Latent Class 2
+
+ PEP
+    Category 1         0.907      0.054     16.825      0.000
+    Category 2         0.093      0.054      1.720      0.085
+ LUBRIF
+    Category 1         0.527      0.182      2.900      0.004
+    Category 2         0.473      0.182      2.605      0.009
+ TESTHIV
+    Category 1         1.000      0.000      0.000      1.000
+    Category 2         0.000      0.000      0.000      1.000
+ PENET
+    Category 1         0.910      0.045     20.445      0.000
+    Category 2         0.090      0.045      2.015      0.044
+ CONDOM
+    Category 1         0.837      0.198      4.233      0.000
+    Category 2         0.163      0.198      0.825      0.410
+
+
+
+LOGISTIC REGRESSION ODDS RATIO RESULTS FOR LATENT CLASS VARIABLES
+
+                                                95% C.I.
+                    Estimate       S.E.  Lower 2.5% Upper 2.5%
+
+ C#1      ON
+    AGE                0.456      0.304      0.123      1.684
+    RACE               0.796      0.324      0.359      1.767
+    EDUC               1.610      0.696      0.689      3.759
+    HIVRISK            0.584      0.244      0.257      1.326
+
+
+ALTERNATIVE PARAMETERIZATIONS FOR THE CATEGORICAL LATENT VARIABLE REGRESSION
+
+                                                    Two-Tailed
+                    Estimate       S.E.  Est./S.E.    P-Value
+
+Parameterization using Reference Class 1
+
+ C#2      ON
+    AGE                0.786      0.667      1.178      0.239
+    RACE               0.228      0.407      0.560      0.575
+    EDUC              -0.476      0.433     -1.100      0.271
+    HIVRISK            0.538      0.419      1.285      0.199
+
+ Intercepts
+    C#2               -1.850      1.255     -1.475      0.140
+
+
+ODDS RATIOS FOR THE ALTERNATIVE PARAMETERIZATIONS FOR THE CATEGORICAL LATENT VARIABLE REGRESSION
+
+                                                95% C.I.
+                    Estimate       S.E.  Lower 2.5% Upper 2.5%
+
+Parameterization using Reference Class 1
+
+ C#2      ON
+    AGE                2.194      1.462      0.594      8.103
+    RACE               1.256      0.511      0.566      2.788
+    EDUC               0.621      0.269      0.266      1.451
+    HIVRISK            1.712      0.717      0.754      3.889
+
+
+CONFIDENCE INTERVALS OF MODEL RESULTS
+
+                  Lower .5%  Lower 2.5%    Lower 5%    Estimate    Upper 5%  Upper 2.5%   Upper .5%
+
+Categorical Latent Variables
+
+ C#1        ON
+    AGE             -2.503      -2.092      -1.882      -0.786       0.311       0.521       0.932
+    RACE            -1.276      -1.025      -0.897      -0.228       0.441       0.570       0.820
+    EDUC            -0.639      -0.372      -0.236       0.476       1.188       1.324       1.591
+    HIVRISK         -1.616      -1.358      -1.226      -0.538       0.151       0.282       0.540
+
+ Intercepts
+    C#1             -1.382      -0.609      -0.214       1.850       3.914       4.309       5.082
+
+
+CONFIDENCE INTERVALS FOR THE LOGISTIC REGRESSION ODDS RATIO RESULTS FOR LATENT CLASS VARIABLES
+
+ C#1      ON
+    AGE              0.082       0.123       0.152       0.456       1.365       1.684       2.539
+    RACE             0.279       0.359       0.408       0.796       1.555       1.767       2.271
+    EDUC             0.528       0.689       0.790       1.610       3.280       3.759       4.906
+    HIVRISK          0.199       0.257       0.293       0.584       1.163       1.326       1.716
+
+
+CONFIDENCE INTERVALS FOR THE ALTERNATIVE PARAMETERIZATIONS FOR THE CATEGORICAL LATENT VARIABLE REGRESSION
+
+Parameterization using Reference Class 1
+
+ C#2      ON
+    AGE             -0.932      -0.521      -0.311       0.786       1.882       2.092       2.503
+    RACE            -0.820      -0.570      -0.441       0.228       0.897       1.025       1.276
+    EDUC            -1.591      -1.324      -1.188      -0.476       0.236       0.372       0.639
+    HIVRISK         -0.540      -0.282      -0.151       0.538       1.226       1.358       1.616
+
+ Intercepts
+    C#2             -5.082      -4.309      -3.914      -1.850       0.214       0.609       1.382
+
+
+CONFIDENCE INTERVALS FOR THE ODDS RATIOS FOR THE ALTERNATIVE PARAMETERIZATIONS FOR THE
+CATEGORICAL LATENT VARIABLE REGRESSION
+
+Parameterization using Reference Class 1
+
+ C#2      ON
+    AGE              0.394       0.594       0.733       2.194       6.568       8.103      12.216
+    RACE             0.440       0.566       0.643       1.256       2.453       2.788       3.582
+    EDUC             0.204       0.266       0.305       0.621       1.266       1.451       1.894
+    HIVRISK          0.583       0.754       0.860       1.712       3.409       3.889       5.033
+
+Available post-processing tools
+
+  Conditional probabilities for the latent class indicators
+  Conditional probabilities for the latent class variable
+
+DIAGRAM INFORMATION
+
+  Mplus diagrams are currently not available for Mixture analysis.
+  No diagram output was produced.
+
+
+     Beginning Time:  22:27:04
+        Ending Time:  22:27:07
+       Elapsed Time:  00:00:03
+
+
+
+MUTHEN & MUTHEN
+3463 Stoner Ave.
+Los Angeles, CA  90066
+
+Tel: (310) 391-9971
+Fax: (310) 391-8971
+Web: www.StatModel.com
+Support: Support@StatModel.com
+
+Copyright (c) 1998-2026 Muthen & Muthen

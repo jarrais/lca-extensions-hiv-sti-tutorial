@@ -39,7 +39,7 @@
 # The synthetic dataset included in this repository mirrors the
 # structure of the original PrEP15-19 dataset used in the paper.
 base <- fread(
-  "Simulated-data/dataPREP-sim-v0.dat",
+  "../Simulated-data/dataPREP-sim-v0.dat",
   header = FALSE,
   col.names = c("pep", "lubrif", "testhiv",	"penet", "condom", "X")
 )
@@ -48,8 +48,6 @@ base
 
 
 base = base |> dplyr::select(-X)
-
-
 # In the distributed simulated file, the indicators are coded as
 # 0/1. poLCA requires categorical response levels to be positive
 # consecutive integers; therefore, recode 0 -> 1 and 1 -> 2.

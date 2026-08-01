@@ -37,7 +37,7 @@
 # The synthetic dataset included in this repository mirrors the
 # structure of the original PrEP15-19 dataset used in the paper.
 base <- fread(
-  "/Users/jonyarrais/Documents/UFF/Projetos/LCA e extensoes/GITHUB/lca-extensions-hiv-sti-tutorial/Simulated-data/dataPREP-sim-v0.dat",
+  "../Simulated-data/dataPREP-sim-v0.dat",
   header = FALSE,
   col.names = c("pep", "lubrif", "testhiv",	"penet", "condom", "X")
 )

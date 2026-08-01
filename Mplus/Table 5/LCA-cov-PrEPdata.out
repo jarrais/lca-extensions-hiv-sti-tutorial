@@ -320,28 +320,6 @@ QUALITY OF NUMERICAL RESULTS
        (ratio of smallest to largest eigenvalue)
 
 
-LATENT CLASS INDICATOR MEANS AND PROBABILITIES FOR EACH LATENT CLASS
-EVALUATED AT THE COVARIATE SAMPLE MEANS
-
-     MEAN/PROBABILITY PROFILES FOR C
-                   Latent class
-                     1      2
-     PEP
-       Category 1  0.877  0.907
-       Category 2  0.123  0.093
-     LUBRIF
-       Category 1  0.194  0.527
-       Category 2  0.806  0.473
-     TESTHIV
-       Category 1  0.859  1.000
-       Category 2  0.141  0.000
-     PENET
-       Category 1  0.785  0.910
-       Category 2  0.215  0.090
-     CONDOM
-       Category 1  0.461  0.837
-       Category 2  0.539  0.163
-
 
 RESULTS IN PROBABILITY SCALE
 
@@ -384,26 +362,6 @@ Latent Class 2
     Category 1         0.837      0.198      4.233      0.000
     Category 2         0.163      0.198      0.825      0.410
 
-
-EQUALITY TESTS OF PROBABILITIES ACROSS THE LATENT CLASSES
-
-                    Chi-Square     P-Value   Degrees of Freedom
-
-
-PEP
-  Overall test          0.105      0.746        1
-
-LUBRIF
-  Overall test          4.459      0.035        1
-
-TESTHIV
-  Overall test        938.986      0.000        1
-
-PENET
-  Overall test          1.625      0.202        1
-
-CONDOM
-  Overall test          1.578      0.209        1
 
 
 LOGISTIC REGRESSION ODDS RATIO RESULTS FOR LATENT CLASS VARIABLES
